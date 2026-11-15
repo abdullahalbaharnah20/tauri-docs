@@ -1,121 +1,640 @@
----
-title: Nuxt
-i18nReady: true
-tableOfContents:
-  minHeadingLevel: 2
-  maxHeadingLevel: 5
----
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>بودكاست مع عبدالله — نسبة مشاهدات الحلقات</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--tx:#1d1d1b;--mu:#6b6860;--ac:#c4372b;--act:#fff;--bd:#e4e0d6;--bar:#c4372b;--bar2:#e8c9c5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12445f;--card:#185673;--tx:#eef8fd;--mu:#a9cfe3;--ac:#fff;--act:#12445f;--bd:#2a7396;--bar:#fff;--bar2:#1f6a8e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12445f;--card:#185673;--tx:#eef8fd;--mu:#a9cfe3;--ac:#fff;--act:#12445f;--bd:#2a7396;--bar:#fff;--bar2:#1f6a8e;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Tajawal',system-ui,sans-serif;line-height:1.6}
+main{max-width:980px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:1.6rem;margin:8px 0 4px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:64px;height:64px;border-radius:16px;background:#fff;padding:4px;flex:none}
+p.sub{color:var(--mu);margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:16px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}
+.stat b{display:block;font-size:1.5rem;color:var(--ac)}
+.stat span{color:var(--mu);font-size:.85rem}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:1780px}
+.stat input{font-size:1.4rem;font-weight:700;color:var(--ac);padding:2px 6px;margin-top:2px}
+th{font-size:.8rem;color:var(--mu);font-weight:500;text-align:right;padding:6px 6px}
+td{padding:5px 4px;border-top:1px solid var(--bd);vertical-align:middle}
+input,textarea{font:inherit;resize:none;overflow:hidden;min-height:38px;line-height:1.4;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:7px 8px;width:100%}
+input:focus{outline:2px solid var(--ac);outline-offset:0}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+td input[type=number]{width:84px}
+td input[type=date]{width:136px}
+button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px}
+button.p{background:var(--ac);border-color:var(--ac);color:var(--act)}
+button.x{padding:4px 9px;color:var(--mu)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.bars .b{display:grid;grid-template-columns:minmax(130px,240px) 1fr 60px;gap:10px;align-items:center;margin:8px 0;font-size:.9rem}
+.bars .t{overflow-wrap:anywhere}
+.bars .tr{background:var(--bar2);border-radius:6px;height:16px;overflow:hidden}
+.bars .f{background:var(--bar);height:100%;border-radius:6px;width:0;transition:width .4s}
+.note{color:var(--mu);font-size:.85rem;margin-top:10px}
+select{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:7px 8px}
+.subform input{width:auto;flex:1 1 150px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--bd);border-radius:999px;padding:2px 10px;font-size:.85rem}
+.chip button.x{padding:0 4px;border:0;background:none}
+.tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tab.on{background:var(--ac);border-color:var(--ac);color:var(--act)}
+.ctl label{display:flex;flex-direction:column;gap:4px;font-size:.85rem;color:var(--mu)}
+.ctl .chk{flex-direction:row;align-items:center;gap:6px;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:999px;padding:4px 12px;cursor:pointer}
+.ctl input[type=checkbox]{width:auto;min-height:0;margin:0}
+.al{display:flex;flex-direction:column;gap:4px;font-size:.85rem;color:var(--mu);flex:1 1 140px}
+.sbar{display:flex;height:30px;border-radius:8px;overflow:hidden;background:var(--bar2);margin-top:12px}
+.sbar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.8rem;font-weight:700;overflow:hidden;white-space:nowrap;transition:width .4s}
+.lg{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:.85rem;color:var(--mu)}
+.lg u{display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:5px;text-decoration:none}
+.aud h4{margin:18px 0 0;font-size:.95rem}
+.foot{max-width:980px;margin:0 auto;padding:0 16px calc(28px + env(safe-area-inset-bottom,0px));text-align:center}
+.foot a{display:inline-flex;align-items:center;gap:8px;color:var(--tx);text-decoration:none;background:var(--card);border:1px solid var(--bd);border-radius:999px;padding:8px 18px;font-size:.95rem}
+.foot a:hover{border-color:var(--ac)}
+.foot bdi{color:var(--mu);font-size:.85rem}
+.mt{min-width:620px}
+.mt td,.mt th{white-space:nowrap}
+.chip-s{border-radius:999px;padding:5px 12px;font-size:.85rem;white-space:nowrap;cursor:pointer;color:var(--tx)}
+.chip-s.ok{background:rgba(46,160,67,.2);border-color:#2ea043}
+.chip-s.no{background:rgba(229,83,75,.2);border-color:#e5534b}
+.duo{display:inline-flex;border:1px solid var(--bd);border-radius:999px;overflow:hidden}
+.duo-b{border:0;border-radius:0;background:transparent;padding:6px 12px;min-height:36px;min-width:44px;font-size:.85rem;opacity:.45;white-space:nowrap;cursor:pointer;color:var(--tx)}
+.duo-b.on{opacity:1;font-weight:700}
+.duo-b.ok.on{background:rgba(46,160,67,.28)}
+.duo-b.no.on{background:rgba(229,83,75,.28)}
+</style>
+</head>
+<body>
+<main>
+<h1 class="brand"><img class="logo" alt="" src="data:image/png;base64,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"><span>بودكاست مع عبدالله</span></h1>
+<p class="sub">متابعة أداء القناة</p>
 
-import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+<div class="stats" id="stats"></div>
 
-Nuxt is a meta framework for Vue. Learn more about Nuxt at https://nuxt.com. This guide is accurate as of Nuxt 4.2.
+<div class="card" id="sec-subs">
+  <b>👥 المتابعون</b>
+  <div class="stats" id="subStats" style="margin:12px 0 0"></div>
+  <div class="row" style="justify-content:space-between;align-items:center;margin:14px 0 4px"><b style="font-size:.95rem">نمو المتابعين</b><select id="sm"><option value="inc">الزيادة بين التسجيلات</option><option value="cnt">العدد الإجمالي</option></select></div>
+  <div id="subchart"></div>
+  <div class="row subform">
+    <input type="number" lang="en" id="subn" min="0" placeholder="عدد المتابعين الحاليين">
+    <input type="date" lang="en" id="subd">
+    <button class="p" id="subadd">تسجيل</button>
+  </div>
+  <div class="row" id="sublist"></div>
+  <div class="note">سجّل عدد المتابعين بانتظام (يوميًا أفضل). تظهر نسبة الزيادة لفترة ما عندما تكون مسجّلاً عددًا بتاريخ قبل بدايتها (يوم، أسبوع، 30 يومًا، سنة).</div>
+</div>
 
-## Checklist
+<div class="card" id="sec-snap">
+  <b>📊 إحصائيات القناة (كل الوقت)</b>
+  <div class="stats" id="snapStats" style="margin:12px 0 0"></div>
+  <div class="note">المشاهدات والإعجابات والتعليقات تُحسب تلقائيًا من الجدول (الحلقات المنشورة فقط، طويل + شورت) وتتغير مع أي تعديل فيه، والمتابعون من قسم المتابعين أعلاه.</div>
+</div>
 
-- Use SSG by setting `ssr: false`. Tauri doesn't support server based solutions.
-- Use default `../dist` as `frontendDist` in `tauri.conf.json`.
-- Compile using `nuxi build`.
-- (Optional): Disable telemetry by setting `telemetry: false` in `nuxt.config.ts`.
+<div class="card aud" id="sec-aud">
+  <b>🎯 تحليلات الجمهور (من YouTube Studio)</b>
+  <h4>وقت المشاهدة: المشتركون / غير المشتركين</h4>
+  <div class="row">
+    <label class="al">المشتركون (%)<input type="number" lang="en" min="0" max="100" step="0.1" data-ak="sub"></label>
+    <label class="al">غير المشتركين (%)<input type="number" lang="en" min="0" max="100" step="0.1" data-ak="non"></label>
+  </div>
+  <div class="sbar" id="audBar1"></div><div class="lg" id="audLg1"></div>
+  <h4>شرائح الجمهور حسب سلوك المشاهدة</h4>
+  <div class="row">
+    <label class="al">المشاهدون الجدد (%)<input type="number" lang="en" min="0" max="100" step="0.1" data-ak="nw"></label>
+    <label class="al">المشاهدون العاديون (%)<input type="number" lang="en" min="0" max="100" step="0.1" data-ak="cs"></label>
+    <label class="al">المشاهدون المنتظمون (%)<input type="number" lang="en" min="0" max="100" step="0.1" data-ak="rg"></label>
+  </div>
+  <div class="sbar" id="audBar2"></div><div class="lg" id="audLg2"></div>
+  <div class="note">أدخل النسب كما تظهر في YouTube Studio (Analytics ← Audience). عند إدخال نسبة المشتركين تُحسب نسبة غير المشتركين تلقائيًا والعكس.</div>
+</div>
 
-## Example Configuration
+<div class="card" id="sec-table">
+  <div class="note" id="stNote" style="margin:0 0 8px">✅ تم النشر · ❌ لم يُنشر — اضغط على الحالة لتبديلها</div>
+  <div class="scroll">
+  <table>
+    <thead><tr>
+      <th>#</th><th>عنوان الحلقة</th><th>النوع</th><th>الحالة</th><th>مدة الحلقة (دقيقة)</th><th>تاريخ النشر</th>
+      <th title="من يوم النشر حتى نشر الحلقة التالية">المشاهدات</th><th title="عدّل رقم المشاهدات لتسجيل تحديث جديد، ثم مرّر المؤشر على النسبة لرؤية السجل">نسبة زيادة المشاهدات</th><th>الإعجابات</th><th>التعليقات</th><th>وقت المشاهدة (ساعات)</th><th>CTR الصورة المصغرة (%)</th>
+      <th>المدة (يوم)</th><th>نسبة الحلقة من إجمالي المشاهدات</th><th>متوسط يومي</th><th>نسبة التفاعل</th><th>دقائق/مشاهدة</th><th>نسبة الاحتفاظ</th><th></th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  </div>
+  <div class="row">
+    <button class="p" id="add">+ إضافة حلقة</button>
+    <button id="clear">مسح الكل</button>
+    <button id="vhr">تصفير نسبة الزيادة</button>
+    <button id="csv">⬇ تصدير CSV</button>
+    <button id="bk">💾 حفظ نسخة احتياطية</button>
+    <button id="ci">📥 استيراد CSV</button>
+    <input type="file" id="cf" accept=".csv,text/csv" hidden>
+    <button id="rs">📂 استعادة من نسخة</button>
+    <input type="file" id="rf" accept=".json,application/json" hidden>
+    <button id="sy" class="p">🔄 مزامنة الآن</button>
+    <span id="msg" class="note" style="align-self:center;margin:0"></span>
+  </div>
+  <div class="note">أدخل الحلقات من الأقدم إلى الأحدث. في خانة المشاهدات أدخل ما حققته الحلقة من يوم نشرها حتى يوم نشر الحلقة التالية (من YouTube Studio). آخر حلقة تُحسب فترتها حتى اليوم.</div>
+</div>
 
-<Steps>
+<div class="card bars" id="sec-bars">
+  <b>نسبة كل حلقة من إجمالي المشاهدات</b>
+  <div id="bars"></div>
+</div>
+<div class="card" id="sec-pub">
+  <div class="row" style="margin:0 0 8px;justify-content:space-between;align-items:center"><b>📅 تحليل النشر</b><select id="pt"><option value="all">الكل</option><option value="long">مقطع طويل</option><option value="short">شورت</option></select></div>
+  <h4 style="margin:10px 0 6px;font-size:.95rem">المقارنة الشهرية</h4>
+  <div class="scroll" id="monthTbl"></div>
+  <h4 style="margin:18px 0 0;font-size:.95rem">أفضل يوم للنشر</h4>
+  <div id="dayNote" class="note" style="margin:6px 0 0"></div>
+  <div id="dayChart"></div>
+  <div class="note">المشاهدات المحسوبة هي مشاهدات الفترة المدخلة في الجدول، وتُنسب لشهر ويوم نشر الحلقة. المتابعون الجدد يُحسبون من تسجيلات المتابعين (آخر عدد في الشهر مقابل آخر عدد في الشهر السابق)، ويحتاجان تسجيلين على الأقل. الحلقات غير المنشورة لا تُحسب.</div>
+</div>
 
-1.  ##### Update Tauri configuration
+<div class="card" id="sec-year">
+  <div class="row" style="margin:0 0 8px;justify-content:space-between;align-items:center"><b>📈 تحسّن القناة خلال السنة</b><select id="yr"></select></div>
+  <div class="stats" id="yrStats" style="margin:8px 0 0"></div>
+  <div class="note" id="yrNote"></div>
+</div>
 
-          <Tabs>
+<div class="card" id="sec-chart">
+  <div class="row" style="margin:0 0 8px;justify-content:space-between;align-items:center">
+    <b>تطوّر الأداء عبر الحلقات</b>
+    <select id="cm"><option value="c">المشاهدات</option><option value="l">الإعجابات</option><option value="m">التعليقات</option><option value="h">ساعات المشاهدة</option><option value="r">CTR الصورة المصغرة</option></select>
+  </div>
+  <div id="chart"></div>
+  <div class="note" style="display:flex;gap:16px"><span><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--bar)"></i> مقطع طويل</span><span><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--mu)"></i> شورت</span></div>
+</div>
+</main>
+<footer class="foot"><a href="https://abdullah-website-delta.vercel.app/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">🌐</span><span>موقع عبدالله</span><bdi dir="ltr">abdullah-website-delta.vercel.app</bdi></a></footer>
 
-    <TabItem label="npm">
-
-        ```json
-        // tauri.conf.json
-        {
-          "build": {
-            "beforeDevCommand": "npm run dev",
-            "beforeBuildCommand": "npm run generate",
-            "devUrl": "http://localhost:3000",
-            "frontendDist": "../dist"
-          }
-        }
-        ```
-
-              </TabItem>
-              <TabItem label="yarn">
-
-        ```json
-        // tauri.conf.json
-        {
-          "build": {
-            "beforeDevCommand": "yarn dev",
-            "beforeBuildCommand": "yarn generate",
-            "devUrl": "http://localhost:3000",
-            "frontendDist": "../dist"
-          }
-        }
-        ```
-
-              </TabItem>
-              <TabItem label="pnpm">
-
-        ```json
-        // tauri.conf.json
-        {
-          "build": {
-            "beforeDevCommand": "pnpm dev",
-            "beforeBuildCommand": "pnpm generate",
-            "devUrl": "http://localhost:3000",
-            "frontendDist": "../dist"
-          }
-        }
-        ```
-
-              </TabItem>
-              <TabItem label="deno">
-
-        ```json
-        // tauri.conf.json
-        {
-          "build": {
-            "beforeDevCommand": "deno task dev",
-            "beforeBuildCommand": "deno task generate",
-            "devUrl": "http://localhost:3000",
-            "frontendDist": "../dist"
-          }
-        }
-        ```
-
-              </TabItem>
-
-          </Tabs>
-
-1.  ##### Update Nuxt configuration
-
-    ```ts
-    export default defineNuxtConfig({
-      compatibilityDate: '2025-05-15',
-      // (optional) Enable the Nuxt devtools
-      devtools: { enabled: true },
-      // Enable SSG
-      ssr: false,
-      // Enables the development server to be discoverable by other devices when running on iOS physical devices
-      devServer: {
-        host: '0',
-      },
-      vite: {
-        // Better support for Tauri CLI output
-        clearScreen: false,
-        // Enable environment variables
-        // Additional environment variables can be found at
-        // https://v2.tauri.app/reference/environment-variables/
-        envPrefix: ['VITE_', 'TAURI_'],
-        server: {
-          // Tauri requires a consistent port
-          strictPort: true,
-        },
-      },
-      // Avoids error [unhandledRejection] EMFILE: too many open files, watch
-      ignore: ['**/src-tauri/**'],
+<script>
+const KEY='abdullah-podcast-v2';
+let data=[];
+const sample=[{"t": "معنى الإرادة", "d": "2026-02-08", "n": "", "c": "71", "l": "7", "m": "4", "h": "1.2", "r": "0", "u": "4.39", "y": "long", "s": "pub"}, {"t": "حقق حلمك", "d": "2026-03-05", "n": "", "c": "37", "l": "6", "m": "1", "h": "1.4", "r": "0", "u": "4.19", "y": "long", "s": "pub"}, {"t": "مفتاح اللحظة", "d": "2026-03-12", "n": "", "c": "24", "l": "3", "m": "1", "h": "0.5", "r": "0", "u": "12.50", "y": "long", "s": "pub"}, {"t": "القنبلة الموقوتة", "d": "2026-03-19", "n": "", "c": "22", "l": "1", "m": "0", "h": "0.2", "r": "0", "u": "17.47", "y": "long", "s": "pub"}, {"t": "الفضاء المظلم", "d": "2026-03-26", "n": "", "c": "31", "l": "3", "m": "0", "h": "0.8", "r": "0", "u": "13.11", "y": "long", "s": "pub"}, {"t": "الرحلة", "d": "2026-04-05", "n": "", "c": "31", "l": "3", "m": "0", "h": "0.5", "r": "0", "u": "7.56", "y": "long", "s": "pub"}, {"t": "منتصف الطريق", "d": "2026-04-12", "n": "", "c": "37", "l": "3", "m": "0", "h": "0.9", "r": "0", "u": "9.23", "y": "long", "s": "pub"}, {"t": "اللحظة الأخيرة", "d": "2026-04-26", "n": "", "c": "75", "l": "2", "m": "0", "h": "1.7", "r": "0", "u": "42.27", "y": "long", "s": "pub"}, {"t": "القفزة الكبرى", "d": "2026-05-10", "n": "", "c": "90", "l": "2", "m": "0", "h": "1.8", "r": "0", "u": "8.21", "y": "long", "s": "pub"}, {"t": "بوصلة الشغف", "d": "2026-05-24", "n": "", "c": "69", "l": "3", "m": "0", "h": "2.5", "r": "0.8", "u": "20.45", "y": "long", "s": "pub"}, {"t": "شيفرة النجاح", "d": "2026-06-07", "n": "", "c": "73", "l": "3", "m": "0", "h": "1.5", "r": "3.1", "u": "10.49", "y": "long", "s": "pub"}, {"t": "أبعد من الأفق", "d": "2026-07-05", "n": "", "c": "15", "l": "0", "m": "0", "h": "1.23", "r": "2.0", "u": "32.10", "y": "long", "s": "pub"}, {"t": "صناعة الأثر", "d": "", "n": "", "c": "57", "l": "3", "m": "1", "h": "1.58", "r": "0", "u": "12.23", "y": "long", "s": "pub"}, {"t": "ساعة الصفر", "d": "2026-08-02", "n": "", "c": "268", "l": "5", "m": "0", "h": "1.9", "r": "1.2", "u": "8.56", "y": "long", "s": "pub"}, {"t": "فلسفة الإنجاز", "d": "2026-08-09", "n": "", "c": "178", "l": "5", "m": "1", "h": "2.30", "r": "1.4", "u": "13.37", "y": "long", "s": "pub"}, {"t": "روح المبادرة", "d": "2026-08-23", "n": "", "c": "23", "l": "3", "m": "0", "h": "2.11", "r": "7.7", "u": "11.55", "y": "long", "s": "pub"}, {"t": "كسر الحواجز", "d": "2026-09-06", "n": "", "c": "152", "l": "3", "m": "0", "h": "4.44", "r": "1.7", "u": "17.44", "y": "long", "s": "pub"}, {"t": "معادلة المستحيل", "d": "2026-09-20", "n": "", "c": "22", "l": "3", "m": "0", "h": "5.13", "r": "4.9", "u": "16.31", "y": "long", "s": "pub"}, {"t": "هندسة العقل", "d": "2026-10-04", "n": "", "c": "20", "l": "0", "m": "0", "h": "4.1", "r": "3.3", "u": "24.53", "y": "long", "s": "pub"}, {"t": "استثمار العمر", "d": "2026-10-18", "n": "", "c": "221", "l": "2", "m": "0", "h": "7.46", "r": "1.8", "u": "27.05", "y": "long", "s": "pub"}, {"t": "أثر لا ينطفئ", "d": "2026-11-01", "n": "", "c": "12", "l": "1", "m": "1", "h": "3.26", "r": "4.9", "u": "24.59", "y": "long", "s": "pub"}, {"t": "توقف عن الكذب على نفسك", "d": "2026-08-28", "n": "", "c": "36", "l": "1", "m": "0", "h": "0.5", "r": "0", "u": "2.12", "y": "short", "s": "pub"}, {"t": "ابدأ الآن فالنقطة تنتظرك", "d": "2026-11-11", "n": "", "c": "9", "l": "0", "m": "0", "h": "0", "r": "0", "u": "2.11", "y": "short", "s": "pub"}, {"t": "أيقونة التغيير", "d": "2026-11-15", "n": "", "c": "0", "l": "0", "m": "0", "h": "0", "r": "0", "u": "4", "y": "long", "s": "draft"}];
+try{const s=localStorage.getItem(KEY);data=s?JSON.parse(s):sample}catch(e){data=sample}
+if(!Array.isArray(data))data=sample;
+data.forEach(r=>{if(!r.y)r.y='long';if(!r.s)r.s='pub'});
+try{const s=JSON.parse(localStorage.getItem(KEY+'-shorts')||'[]');if(Array.isArray(s)&&s.length){s.forEach(r=>{r.y='short';data.push(r)});data.sort((a,b)=>{const x=a.d||'9999',z=b.d||'9999';return x<z?-1:x>z?1:0});localStorage.setItem(KEY,JSON.stringify(data))}localStorage.removeItem(KEY+'-shorts')}catch(e){}
+const $=id=>document.getElementById(id);
+const fmt=n=>isFinite(n)?Math.round(n).toLocaleString('en-US'):'—';
+const pct=n=>isFinite(n)?n.toFixed(1)+'%':'—';
+let F={y:'all',p:'all',s:'date',t:'auto',h:[]};
+try{localStorage.removeItem(KEY+'-ui')}catch(e){}
+if(!Array.isArray(F.h))F.h=[];
+const SECS=[['subs','المتابعون'],['snap','إحصائيات القناة'],['aud','تحليلات الجمهور'],['table','الجدول'],['bars','نسب الحلقات'],['chart','تطوّر الأداء']];
+function match(r){
+  if(F.y!=='all'&&(r.y||'long')!==F.y)return false;
+  if(F.p!=='all'){if(!r.d)return false;const cut=new Date(Date.now()-(+F.p)*864e5).toISOString().slice(0,10);if(r.d<cut)return false}
+  return true;
+}
+function saveUI(){try{localStorage.setItem(KEY+'-ui',JSON.stringify(F))}catch(e){}}
+function applyUI(){
+  if(F.t==='light'||F.t==='dark')document.documentElement.setAttribute('data-theme',F.t);else document.documentElement.removeAttribute('data-theme');
+  SECS.forEach(([k])=>{const el=document.getElementById('sec-'+k);if(el)el.style.display=F.h.includes(k)?'none':''});
+}
+function barOrder(res){
+  const a=res.map((x,i)=>({x,i})).filter(o=>match(data[o.i]));
+  if(F.s==='views')a.sort((p,q)=>(parseFloat(data[q.i].c)||0)-(parseFloat(data[p.i].c)||0));
+  return a;
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data));localStorage.setItem(KEY+'-ts',Date.now())}catch(e){}}
+function days(a,b){return Math.round((new Date(b)-new Date(a))/864e5)}
+function calc(){
+  const today=new Date().toISOString().slice(0,10);
+  const live=r=>r.s!=='draft';
+  const tot=data.reduce((s,r)=>s+(live(r)?parseFloat(r.c)||0:0),0);
+  return data.map((r,i)=>{
+    if(!live(r))return {dd:NaN,w:NaN,p:NaN,avg:NaN,c:NaN,last:false};
+    const next=data.slice(i+1).find(live);
+    const c=parseFloat(r.c);
+    const end=next&&next.d?next.d:today;
+    const dd=r.d?Math.max(days(r.d,end),0):NaN;
+    const w=c;
+    return {dd,w,p:tot>0?w/tot*100:NaN,avg:dd>0?w/dd:NaN,c,last:!next};
+  });
+}
+const STATUS_ICON=true; /* false = الرجوع لقائمة الاختيارات */
+const STATUS_DUO=true; /* false = الشريحة الواحدة أو القائمة */
+function duoHTML(r,i){
+  const dr=r.s==='draft';
+  return `<div class="duo"><button type="button" class="duo-b ok${dr?'':' on'}" data-i="${i}" data-sv="pub" title="تم النشر" aria-pressed="${!dr}">✅${dr?'':' تم النشر'}</button><button type="button" class="duo-b no${dr?' on':''}" data-i="${i}" data-sv="draft" title="لم يُنشر" aria-pressed="${dr}">❌${dr?' لم يُنشر':''}</button></div>`;
+}
+try{$('stNote').hidden=STATUS_DUO||!STATUS_ICON}catch(e){}
+function render(){
+  const res=calc();
+  $('rows').innerHTML=data.map((r,i)=>`<tr>
+   <td class="num">${i+1}</td>
+   <td style="min-width:260px"><textarea rows="1" data-i="${i}" data-k="t">${(r.t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}</textarea></td>
+   <td><select data-i="${i}" data-k="y"><option value="long"${r.y==='short'?'':' selected'}>مقطع طويل</option><option value="short"${r.y==='short'?' selected':''}>شورت</option></select></td>
+   <td>${STATUS_DUO?duoHTML(r,i):STATUS_ICON?`<button type="button" class="chip-s ${r.s==='draft'?'no':'ok'}" data-i="${i}" data-st="1">${r.s==='draft'?'❌ لم يُنشر':'✅ تم النشر'}</button>`:`<select data-i="${i}" data-k="s"><option value="pub"${r.s==='draft'?'':' selected'}>تم النشر</option><option value="draft"${r.s==='draft'?' selected':''}>لم يتم النشر</option></select>`}</td>
+   <td><input type="number" lang="en" min="0" step="any" data-i="${i}" data-k="u" value="${r.u??''}"></td>
+   <td><input type="date" lang="en" data-i="${i}" data-k="d" value="${r.d||''}"></td>
+   
+   <td><input type="number" lang="en" min="0" data-i="${i}" data-k="c" value="${r.c??''}"></td>
+   <td class="num" id="g${i}"></td>
+   <td><input type="number" lang="en" min="0" data-i="${i}" data-k="l" value="${r.l??''}"></td>
+   <td><input type="number" lang="en" min="0" data-i="${i}" data-k="m" value="${r.m??''}"></td>
+   <td><input type="number" lang="en" min="0" step="0.1" data-i="${i}" data-k="h" value="${r.h??''}"></td>
+   <td><input type="number" lang="en" min="0" max="100" step="0.1" data-i="${i}" data-k="r" value="${r.r??''}"></td>
+   <td class="num" id="dd${i}"></td><td class="num" id="p${i}"></td><td class="num" id="a${i}"></td><td class="num" id="e${i}"></td><td class="num" id="h${i}"></td><td class="num" id="k${i}"></td>
+   <td><button class="x" data-del="${i}">✕</button></td></tr>`).join('');
+  update();
+}
+function fit(el){el.style.height='auto';const h=el.scrollHeight;el.style.height=(h>20?h:38)+'px'}
+function update(){
+  document.querySelectorAll('#rows textarea').forEach(fit);
+  const res=calc();
+  res.forEach((x,i)=>{
+    $('dd'+i).textContent=isFinite(x.dd)?x.dd:'—';
+    
+    $('p'+i).textContent=pct(x.p);
+    $('a'+i).textContent=fmt(x.avg);
+    const v=parseFloat(data[i].c),L=parseFloat(data[i].l)||0,M=parseFloat(data[i].m)||0;
+    $('e'+i).textContent=v>0?pct((L+M)/v*100):'—';
+    const H=parseFloat(data[i].h)||0;
+    $('h'+i).textContent=(v>0&&H>0)?(H*60/v).toFixed(1):'—';
+    const U=parseFloat(data[i].u);
+    $('k'+i).textContent=(v>0&&H>0&&U>0)?pct(H*60/v/U*100):'—';
+    const hv=Array.isArray(data[i].vh)?data[i].vh:[],gE=$('g'+i);
+    if(hv.length>=2){
+      const a=hv[hv.length-2].v,b=hv[hv.length-1].v,df=b-a;
+      gE.textContent=(df>0?'▲ +':df<0?'▼ ':'')+fmt(df)+(a>0?' ('+(df>0?'+':'')+(df/a*100).toFixed(1)+'%)':'');
+      gE.title=hv.map(o=>(o.d||'—')+': '+fmt(o.v)).join('\n')+(hv[0].v>0?'\nمنذ أول قراءة: '+((b-hv[0].v)/hv[0].v*100).toFixed(1)+'%':'');
+    }else{gE.textContent='—';gE.title='عدّل رقم المشاهدات لتسجيل تحديث جديد'}
+  });
+  const done=res.filter((x,i)=>!x.last&&isFinite(x.p));
+  const PUB=data.filter(r=>r.s!=='draft'&&match(r)),NOPUB=data.filter(r=>r.s==='draft').length;const LD=PUB.filter(r=>r.y!=='short'),SH=PUB.filter(r=>r.y==='short');
+  const sS=f=>SH.reduce((s,r)=>s+(parseFloat(r[f])||0),0);
+  const avgP=LD.length?LD.reduce((s,r)=>s+(parseFloat(r.c)||0),0)/LD.length:NaN;
+  const totC=LD.reduce((s,r)=>s+(parseFloat(r.c)||0),0);
+  const totL=LD.reduce((s,r)=>s+(parseFloat(r.l)||0),0);
+  const totM=LD.reduce((s,r)=>s+(parseFloat(r.m)||0),0);
+  const totH=LD.reduce((s,r)=>s+(parseFloat(r.h)||0),0);
+  const totU=LD.reduce((s,r)=>s+(parseFloat(r.u)||0),0);
+  const hm=m=>{m=Math.round(m);const h=Math.floor(m/60),n=m%60;return (h?h.toLocaleString('en-US')+' س ':'')+n.toLocaleString('en-US')+' د'};
+  const ctrs=LD.map(r=>parseFloat(r.r)).filter(x=>isFinite(x)&&x>0);
+  const avgR=ctrs.length?ctrs.reduce((a,b)=>a+b,0)/ctrs.length:NaN;
+  const rets=LD.map(r=>{const v=parseFloat(r.c),H=parseFloat(r.h),U=parseFloat(r.u);return v>0&&H>0&&U>0?H*60/v/U*100:NaN}).filter(isFinite);
+  const avgK=rets.length?rets.reduce((a,b)=>a+b,0)/rets.length:NaN;
+  let best=-1,bv=-1;res.forEach((x,i)=>{if(data[i].y!=='short'&&match(data[i])&&isFinite(x.avg)&&x.avg>bv){bv=x.avg;best=i}});
+  $('stats').innerHTML=`
+   <div class="stat"><b>${fmt(PUB.reduce((s,r)=>s+(parseFloat(r.c)||0),0))}</b><span>مجموع مشاهدات القناة كاملة (طويل + شورت)</span></div>
+   <div class="stat"><b>${LD.length}</b><span>عدد الحلقات المنشورة</span></div>
+   <div class="stat"><b>${NOPUB}</b><span>لم يتم نشرها بعد</span></div>
+   <div class="stat"><b>${hm(totU)}</b><span>مجموع مدة جميع الحلقات</span></div>
+   <div class="stat"><b>${fmt(totC)}</b><span>إجمالي المشاهدات</span></div>
+   <div class="stat"><b>${fmt(totL)}</b><span>إجمالي الإعجابات</span></div>
+   <div class="stat"><b>${fmt(totM)}</b><span>إجمالي التعليقات</span></div>
+   <div class="stat"><b>${fmt(totH)}</b><span>إجمالي ساعات المشاهدة</span></div>
+   <div class="stat"><b>${isFinite(avgR)?avgR.toFixed(1)+'%':'—'}</b><span>متوسط CTR للصورة المصغرة</span></div>
+   <div class="stat"><b>${pct(avgK)}</b><span>متوسط نسبة الاحتفاظ بالجمهور</span></div>
+   <div class="stat"><b>${fmt(avgP)}</b><span>متوسط المشاهدات لكل حلقة</span></div>
+   <div class="stat"><b>${best>=0?(data[best].t||'#'+(best+1)):'—'}</b><span>الأعلى متوسطًا يوميًا</span></div>
+   <div class="stat"><b>${SH.length}</b><span>عدد مقاطع الشورت</span></div>
+   <div class="stat"><b>${hm(sS('u'))}</b><span>مجموع مدة جميع مقاطع الشورت</span></div>
+   <div class="stat"><b>${fmt(sS('c'))}</b><span>إجمالي المشاهدات لمقاطع الشورت</span></div>
+   <div class="stat"><b>${fmt(sS('l'))}</b><span>إجمالي الإعجابات لمقاطع الشورت</span></div>
+   <div class="stat"><b>${fmt(sS('m'))}</b><span>إجمالي التعليقات لمقاطع الشورت</span></div>
+   <div class="stat"><b>${fmt(sS('h'))}</b><span>إجمالي ساعات مشاهدة مقاطع الشورت</span></div>`;
+  $('bars').innerHTML=barOrder(res).map(({x,i})=>`<div class="b"><span class="t">${data[i].t||'#'+(i+1)}${data[i].s==='draft'?' (لم تُنشر)':''}</span>
+   <div class="tr"><div class="f" style="width:${isFinite(x.p)?Math.min(x.p,100):0}%"></div></div><span class="num">${pct(x.p)}</span></div>`).join('')||'<div class="note">لا توجد حلقات.</div>';
+  renderChart();updateSnapAuto();renderPub();renderYear();
+}
+function updateSnapAuto(){if(!$('av'))return;const P=data.filter(r=>r.s!=='draft'&&match(r)),S=f=>P.reduce((a,r)=>a+(parseFloat(r[f])||0),0);$('av').textContent=fmt(S('c'));$('al').textContent=fmt(S('l'));$('am').textContent=fmt(S('m'))}
+$('rows').addEventListener('input',e=>{
+  const i=e.target.dataset.i,k=e.target.dataset.k;
+  if(i===undefined)return;
+  data[i][k]=e.target.value;save();update();
+});
+$('rows').addEventListener('click',e=>{
+  const b=e.target.closest('[data-st]');if(!b)return;
+  const i=b.dataset.i;data[i].s=data[i].s==='draft'?'pub':'draft';save();render();
+});
+$('rows').addEventListener('click',e=>{
+  const b=e.target.closest('[data-sv]');if(!b)return;
+  const i=b.dataset.i,v=b.dataset.sv;if((data[i].s==='draft'?'draft':'pub')===v)return;
+  data[i].s=v;save();render();
+});
+const vBase=new Map();
+$('rows').addEventListener('focusin',e=>{if(e.target.dataset.k==='c')vBase.set(e.target.dataset.i,data[e.target.dataset.i].c)});
+$('rows').addEventListener('change',e=>{
+  if(e.target.dataset.k!=='c')return;
+  const i=e.target.dataset.i,r=data[i],nv=parseFloat(r.c),old=parseFloat(vBase.get(i));
+  if(!isFinite(nv)||nv===old)return;
+  r.vh=Array.isArray(r.vh)?r.vh:[];
+  if(!r.vh.length&&isFinite(old))r.vh.push({d:'',v:old});
+  const td=new Date().toISOString().slice(0,10),L=r.vh[r.vh.length-1];
+  if(L&&L.d===td)L.v=nv;else r.vh.push({d:td,v:nv});
+  save();update();
+});
+$('rows').addEventListener('click',e=>{
+  const d=e.target.dataset.del;
+  if(d!==undefined){data.splice(+d,1);save();render()}
+});
+$('add').onclick=()=>{data.push({t:'فيديو '+(data.length+1),d:'',n:'',c:'',l:'',m:'',h:'',r:'',u:'',y:'long',s:'pub'});save();render()};
+$('clear').onclick=()=>{if(confirm('مسح كل الحلقات؟')){data=[];save();render()}};
+const NL=String.fromCharCode(10);
+const msg=t=>{$('msg').textContent=t};
+function stamp(){try{return +localStorage.getItem(KEY+'-ts')||0}catch(e){return 0}}
+function csvEsc(v){v=String(v??'');return (/[",]/.test(v)||v.includes(NL))?'"'+v.replace(/"/g,'""')+'"':v}
+async function dl(name,txt){
+  try{
+    const d=await claude.use('downloads');
+    if(!d){msg('التنزيل غير متاح هنا');return}
+    await d.save({filename:name,data:txt});msg('تم الحفظ ✓');
+  }catch(e){msg(e&&e.code==='declined'?'أُلغي الحفظ':'تعذّر الحفظ')}
+}
+$('csv').onclick=()=>{
+  const res=calc();
+  const head=['#','عنوان الحلقة','النوع','الحالة','مدة الحلقة (دقيقة)','تاريخ النشر','المشاهدات','الإعجابات','التعليقات','وقت المشاهدة (ساعات)','CTR (%)','المدة (يوم)','نسبة الحلقة من الإجمالي (%)','متوسط يومي','نسبة التفاعل (%)','دقائق/مشاهدة','نسبة الاحتفاظ (%)','زيادة المشاهدات عن القراءة السابقة (%)'];
+  const f=n=>isFinite(n)?+n.toFixed(1):'';
+  const rows=data.map((r,i)=>{
+    const x=res[i],v=parseFloat(r.c),L=parseFloat(r.l)||0,M=parseFloat(r.m)||0,H=parseFloat(r.h)||0;
+    return [i+1,r.t,(r.y==='short'?'شورت':'طويل'),(r.s==='draft'?'لم يتم النشر':'تم النشر'),r.u,r.d,r.c,r.l,r.m,r.h,r.r,isFinite(x.dd)?x.dd:'',f(x.p),f(x.avg),v>0?f((L+M)/v*100):'',(v>0&&H>0)?f(H*60/v):'',(v>0&&H>0&&parseFloat(r.u)>0)?f(H*60/v/parseFloat(r.u)*100):'',(()=>{const h=r.vh||[];return h.length>1&&h[h.length-2].v>0?f((h[h.length-1].v-h[h.length-2].v)/h[h.length-2].v*100):''})()].map(csvEsc).join(',');
+  });
+  dl('podcast-views.csv',String.fromCharCode(0xFEFF)+[head.map(csvEsc).join(','),...rows].join(NL));
+};
+$('bk').onclick=()=>{
+  const d=new Date().toISOString().slice(0,10);
+  dl('podcast-backup-'+d+'.json',JSON.stringify({app:'abdullah-podcast',v:3,savedAt:Date.now(),data,subs,snap,aud},null,2));
+};
+$('rs').onclick=()=>$('rf').click();
+$('rf').onchange=e=>{
+  const file=e.target.files[0];if(!file)return;
+  const rd=new FileReader();
+  rd.onload=()=>{
+    try{
+      const j=JSON.parse(rd.result);const a=Array.isArray(j)?j:j.data;
+      if(!Array.isArray(a))throw new Error('bad');
+      const mp=(r,y)=>({t:r.t||'',d:r.d||'',n:r.n??'',c:r.c??'',l:r.l??'',m:r.m??'',h:r.h??'',r:r.r??'',u:r.u??'',y:r.y||y||'long',s:r.s||'pub',vh:Array.isArray(r.vh)?r.vh:[]});data=a.map(r=>mp(r));if(!Array.isArray(j)&&Array.isArray(j.shorts))j.shorts.forEach(r=>data.push(mp(r,'short')));
+      if(!Array.isArray(j)&&j.snap){snap=j.snap;saveSnap();renderSnap()}
+      if(!Array.isArray(j)&&j.aud){aud={...aud,...j.aud};saveAud();setAudInputs()}
+      if(!Array.isArray(j)&&Array.isArray(j.subs)){subs=j.subs;saveSubs();renderSubs()}
+      save();render();msg('تمت استعادة '+data.length+' حلقة ✓');
+    }catch(err){msg('ملف النسخة غير صالح')}
+  };
+  rd.readAsText(file);e.target.value='';
+};
+$('sy').onclick=async()=>{
+  const btn=$('sy');btn.disabled=true;msg('جارٍ المزامنة…');
+  try{
+    const [db,user]=await Promise.all([claude.use('db'),claude.use('user')]);
+    if(!db||!user){msg('المزامنة غير متاحة هنا (افتح الصفحة في claude.ai وسجّل الدخول)');return}
+    const id=await user.id();
+    if(!id){msg('المزامنة تتطلب تسجيل الدخول');return}
+    const ref=db.doc('data/users/'+id+'/podcast');
+    const ds=await ref.get();
+    const cloud=ds.exists?ds.data():null;
+    if(cloud&&Array.isArray(cloud.rows)&&cloud.savedAt>stamp()){
+      data=cloud.rows.map(r=>({...r,y:r.y||'long',s:r.s||'pub'}));if(Array.isArray(cloud.shorts))cloud.shorts.forEach(r=>data.push({...r,y:'short'}));
+      if(cloud.snap){snap=cloud.snap;saveSnap();renderSnap()}
+      if(cloud.aud){aud={...aud,...cloud.aud};saveAud();setAudInputs()}
+      if(Array.isArray(cloud.subs)){subs=cloud.subs;try{localStorage.setItem(KEY+'-subs',JSON.stringify(subs))}catch(e){}renderSubs()}
+      try{localStorage.setItem(KEY,JSON.stringify(data));localStorage.setItem(KEY+'-ts',cloud.savedAt)}catch(e){}
+      render();msg('تم تحميل النسخة الأحدث من السحابة ✓');
+    }else{
+      const ts=Date.now();
+      await ref.set({rows:data,subs,snap,aud,savedAt:ts});
+      try{localStorage.setItem(KEY+'-ts',ts)}catch(e){}
+      msg('تم رفع بياناتك إلى السحابة ✓');
+    }
+  }catch(e){msg('تعذّرت المزامنة'+(e&&e.code?' ('+e.code+')':''))}
+  finally{btn.disabled=false}
+};
+const WD=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+function renderPub(){
+  if(!$('pt'))return;
+  const t=$('pt').value;
+  const P=data.filter(r=>r.s!=='draft'&&/^\d{4}-\d{2}-\d{2}$/.test(r.d||'')&&(t==='all'||(r.y||'long')===t));
+  const S=(a,f)=>a.reduce((s,r)=>s+(parseFloat(r[f])||0),0);
+  const M={};P.forEach(r=>{const k=r.d.slice(0,7);(M[k]=M[k]||[]).push(r)});
+  const ks=Object.keys(M).sort();
+  const sb=[...subs].sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
+  const lastIn=k=>{let v=null;for(const s of sb){if(s.d.slice(0,7)<=k)v=s}return v};
+  const rows=ks.map(k=>{
+    const a=M[k],v=S(a,'c');
+    const pm=new Date(Date.UTC(+k.slice(0,4),+k.slice(5,7)-2,1)).toISOString().slice(0,7);
+    const pv=M[pm]?S(M[pm],'c'):null,chg=pv>0?(v-pv)/pv*100:NaN;
+    const cur=lastIn(k),prev=lastIn(pm);
+    const ns=cur&&prev&&cur.d!==prev.d?cur.n-prev.n:NaN;
+    const lb=new Date(k+'-01T00:00:00Z').toLocaleDateString('ar-u-nu-latn',{month:'long',year:'numeric',timeZone:'UTC'});
+    return `<tr><td>${lb}</td><td class="num">${a.length}</td><td class="num">${fmt(v)}</td><td class="num">${isFinite(chg)?(chg>0?'▲ ':chg<0?'▼ ':'')+Math.abs(chg).toFixed(1)+'%':'—'}</td><td class="num">${fmt(S(a,'h'))}</td><td class="num">${fmt(S(a,'l')+S(a,'m'))}</td><td class="num">${isFinite(ns)?(ns>0?'+':'')+fmt(ns):'—'}</td></tr>`;
+  }).reverse();
+  $('monthTbl').innerHTML=rows.length?`<table class="mt"><thead><tr><th>الشهر</th><th>المنشورات</th><th>المشاهدات</th><th>التغيّر عن الشهر السابق</th><th>ساعات المشاهدة</th><th>إعجابات + تعليقات</th><th>المتابعون الجدد</th></tr></thead><tbody>${rows.join('')}</tbody></table>`:'<div class="note">لا توجد حلقات منشورة بتاريخ نشر.</div>';
+  const D=WD.map((n,i)=>{const a=P.filter(r=>new Date(r.d+'T00:00:00Z').getUTCDay()===i);return {n,c:a.length,v:a.length?S(a,'c')/a.length:0}});
+  const cand=D.filter(o=>o.c>=2),pool=cand.length?cand:D.filter(o=>o.c>0);
+  const best=pool.reduce((b,o)=>!b||o.v>b.v?o:b,null);
+  $('dayNote').innerHTML=best?`أفضل يوم للنشر: <b>${best.n}</b> — متوسط ${fmt(best.v)} مشاهدة لكل منشور (من ${best.c} منشور)${best.c<3?' — عينة صغيرة، خذها بحذر':''}`:'لا توجد بيانات كافية.';
+  if(!best){$('dayChart').innerHTML='';return}
+  const W=700,H=230,T=22,B=48,L=10,R=10,slot=(W-L-R)/7,bw=Math.min(slot*.6,52),mx=Math.max(1,...D.map(o=>o.v));
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img"><line x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}" stroke="var(--bd)"/>`;
+  D.forEach((o,j)=>{
+    const cx=L+slot*((6-j)+.5),h=o.v/mx*(H-B-T),y=H-B-h;
+    s+=`<rect x="${cx-bw/2}" y="${y}" width="${bw}" height="${o.c?Math.max(h,2):0}" rx="4" fill="${o===best?'var(--bar)':'var(--mu)'}"><title>${o.n}: ${fmt(o.v)} (${o.c})</title></rect>`;
+    if(o.c)s+=`<text x="${cx}" y="${y-5}" text-anchor="middle" font-size="11" fill="var(--tx)">${fmt(o.v)}</text>`;
+    s+=`<text x="${cx}" y="${H-28}" text-anchor="middle" font-size="12" fill="var(--tx)">${o.n}</text><text x="${cx}" y="${H-12}" text-anchor="middle" font-size="11" fill="var(--mu)">${o.c} منشور</text>`;
+  });
+  $('dayChart').innerHTML=s+'</svg>';
+}
+function renderYear(){
+  const el=$('yrStats'),sel=$('yr');if(!el||!sel)return;
+  const nowY=new Date().getFullYear(),today=new Date().toISOString().slice(0,10);
+  const sb=[...subs].sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
+  const ys=new Set([nowY]);sb.forEach(s=>ys.add(+s.d.slice(0,4)));data.forEach(r=>{if(/^\d{4}/.test(r.d||''))ys.add(+r.d.slice(0,4))});
+  const list=[...ys].filter(isFinite).sort((a,b)=>b-a),key=list.join(',');
+  if(sel.dataset.n!==key){const cur=+sel.value;sel.innerHTML=list.map(y=>`<option value="${y}">${y}</option>`).join('');sel.dataset.n=key;sel.value=list.includes(cur)?cur:nowY}
+  const Y=+sel.value,sp=v=>(v>0?'+':'')+v.toFixed(1)+'%',card=(b,s)=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`;
+  let h='<div style="grid-column:1/-1;font-weight:700">👥 المتابعون</div>';
+  const inY=sb.filter(s=>+s.d.slice(0,4)===Y),before=sb.filter(s=>s.d<Y+'-01-01').pop();
+  const base=before||inY[0],last=inY[inY.length-1];
+  if(last&&base&&base.d!==last.d){
+    const lbl=before?'بداية '+Y:'أول تسجيل ('+base.d+')';
+    const df=last.n-base.n,pc=base.n>0?df/base.n*100:NaN;
+    const days=(new Date(last.d)-new Date(base.d))/864e5,perD=df/days;
+    const left=Y<nowY?0:Math.max(0,(new Date(Y+'-12-31')-new Date(last.d))/864e5);
+    h+=card(fmt(last.n),'المتابعون بتاريخ '+last.d);
+    h+=card(sgn(df),'زيادة المتابعين منذ '+lbl+(isFinite(pc)?' · '+sp(pc):''));
+    h+=card(days>=14?sgn(Math.round(perD*30.44)):'—','متوسط الزيادة الشهرية'+(days<14?' (الفترة قصيرة)':days<60?' (تقديري)':''));
+    h+=Y<nowY?card(fmt(last.n),'العدد في نهاية '+Y):card(days>=14?fmt(Math.round(last.n+perD*left)):'—','تقدير عدد المتابعين نهاية '+Y+' إن استمر النمو');
+  }else h+=card('—','سجّل عدد المتابعين مرتين على الأقل في '+Y);
+  h+='<div style="grid-column:1/-1;font-weight:700;margin-top:6px">👁️ المشاهدات</div>';
+  const P=data.filter(r=>r.s!=='draft'&&/^\d{4}-\d{2}-\d{2}$/.test(r.d||'')),mv={};
+  P.filter(r=>+r.d.slice(0,4)===Y).forEach(r=>{const k=+r.d.slice(5,7);mv[k]=(mv[k]||0)+(parseFloat(r.c)||0)});
+  const mk=Object.keys(mv).map(Number).sort((a,b)=>a-b),tot=mk.reduce((a,k)=>a+mv[k],0);
+  const mn=k=>new Date(Date.UTC(Y,k-1,1)).toLocaleDateString('ar-u-nu-latn',{month:'long',timeZone:'UTC'});
+  if(mk.length){
+    const ch=[];mk.forEach(k=>{if(mv[k+1]!==undefined&&mv[k]>0)ch.push((mv[k+1]-mv[k])/mv[k]*100)});
+    const best=mk.reduce((a,k)=>mv[k]>mv[a]?k:a,mk[0]),worst=mk.reduce((a,k)=>mv[k]<mv[a]?k:a,mk[0]);
+    h+=card(fmt(tot),'مشاهدات '+Y+' (من '+mk.length+' أشهر فيها نشر)');
+    h+=card(ch.length?sp(ch.reduce((a,b)=>a+b,0)/ch.length):'—','متوسط التغيّر الشهري (أشهر متتالية فقط)');
+    h+=card(mn(best),'أفضل شهر · '+fmt(mv[best])+' مشاهدة');
+    h+=mk.length>1?card(mn(worst),'أضعف شهر · '+fmt(mv[worst])+' مشاهدة'):'';
+    const cut=Y===nowY?(Y-1)+today.slice(4):'9999';
+    const pv=P.filter(r=>+r.d.slice(0,4)===Y-1&&r.d<=cut).reduce((a,r)=>a+(parseFloat(r.c)||0),0);
+    if(pv>0)h+=card(sp((tot-pv)/pv*100),(Y===nowY?'مقارنة بالفترة نفسها من ':'مقارنة بـ ')+(Y-1)+' ('+fmt(pv)+' مشاهدة)');
+  }else h+=card('—','لا توجد حلقات منشورة بتاريخ نشر في '+Y);
+  el.innerHTML=h;
+  $('yrNote').textContent='النسب على أرقام صغيرة تضلّل؛ انظر للعدد بجانب كل نسبة. دقة المتابعين تعتمد على انتظام تسجيل عددهم، والمشاهدات هنا هي مشاهدات كل حلقة منسوبة لشهر نشرها.';
+}
+$('yr').onchange=renderYear;
+$('pt').onchange=renderPub;
+try{if(!localStorage.getItem(KEY+'-vhreset1')){data.forEach(r=>{r.vh=[]});localStorage.setItem(KEY+'-vhreset1','1');save()}}catch(e){}
+let vhArm=0;
+$('vhr').onclick=()=>{
+  const b=$('vhr');
+  if(!vhArm){vhArm=1;b.textContent='اضغط مرة أخرى للتأكيد';setTimeout(()=>{vhArm=0;b.textContent='تصفير نسبة الزيادة'},4000);return}
+  vhArm=0;data.forEach(r=>{r.vh=[]});save();update();b.textContent='تم التصفير ✓';setTimeout(()=>{b.textContent='تصفير نسبة الزيادة'},2000);
+};
+let subs=[];
+try{const sv=localStorage.getItem(KEY+'-subs');subs=sv===null?[{d:'2026-11-13',n:52}]:JSON.parse(sv)}catch(e){subs=[{d:'2026-11-13',n:52}]}
+if(!Array.isArray(subs))subs=[];
+function saveSubs(){try{localStorage.setItem(KEY+'-subs',JSON.stringify(subs));localStorage.setItem(KEY+'-ts',Date.now())}catch(e){}}
+const sgn=n=>(n>0?'+':n<0?'−':'')+fmt(Math.abs(n));
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const nf=v=>v.toLocaleString('en-US',{maximumFractionDigits:1});
+function renderSubs(){
+  subs=subs.filter(s=>s&&s.d&&isFinite(parseFloat(s.n))).map(s=>({d:s.d,n:+s.n})).sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
+  const last=subs[subs.length-1];
+  const P=[['آخر يوم',1],['آخر أسبوع',7],['آخر شهر',30],['آخر سنة',365]];
+  let h='';
+  if(last){
+    h+=`<div class="stat"><b>${fmt(last.n)}</b><span>المتابعون الحاليون · ${last.d}</span></div>`;
+    P.forEach(([lb,p])=>{
+      const t=new Date(new Date(last.d).getTime()-p*864e5).toISOString().slice(0,10);
+      let base=null;for(const s of subs){if(s.d<=t)base=s}
+      if(base){const df=last.n-base.n;h+=`<div class="stat"><b>${sgn(df)}</b><span>${lb} · ${base.n>0?pct(df/base.n*100):'—'}</span></div>`}
+      else h+=`<div class="stat"><b>—</b><span>${lb} · لا بيانات كافية</span></div>`;
     });
-    ```
+  }else h='<div class="note">أدخل عدد المتابعين الحاليين لتبدأ المتابعة.</div>';
+  $('subStats').innerHTML=h;renderSubChart();renderYear();
+  $('sublist').innerHTML=subs.slice(-8).reverse().map(s=>`<span class="chip">${s.d} · ${fmt(s.n)} <button class="x" data-sd="${s.d}">✕</button></span>`).join('');
+}
+function renderChart(){
+  const k=$('cm').value||'c';
+  const pts=data.map((r,i)=>({i:i+1,s:r.s,y:r.y,t:r.t||('#'+(i+1)),v:parseFloat(r[k])})).filter(p=>isFinite(p.v)&&p.s!=='draft'&&match(data[p.i-1]));
+  const el=$('chart');
+  if(pts.length<2){el.innerHTML='<div class="note">أدخل بيانات حلقتين على الأقل لعرض الخط.</div>';return}
+  const W=700,H=240,L=50,R=14,T=14,B=30;
+  const max=Math.max(...pts.map(p=>p.v))||1;
+  const slot=(W-L-R)/pts.length,bw=Math.min(slot*0.6,40);
+  const x=j=>L+slot*(j+.5);
+  const y=v=>T+(H-T-B)*(1-v/max);
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img">`;
+  [0,.5,1].forEach(f=>{const yy=y(max*f);s+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="var(--bd)"/><text x="${L-6}" y="${yy+4}" text-anchor="end" font-size="11" fill="var(--mu)">${nf(max*f)}</text>`});
+  
+  const step=Math.ceil(pts.length/12);
+  pts.forEach((p,j)=>{
+    s+=`<rect x="${x(j)-bw/2}" y="${y(p.v)}" width="${bw}" height="${Math.max(H-B-y(p.v),2)}" rx="4" fill="${p.y==='short'?'var(--mu)':'var(--bar)'}"><title>${esc(p.t)}: ${nf(p.v)}</title></rect>`;
+    if(pts.length<=12)s+=`<text x="${x(j)}" y="${y(p.v)-5}" text-anchor="middle" font-size="11" fill="var(--tx)">${nf(p.v)}</text>`;
+    if(j%step===0)s+=`<text x="${x(j)}" y="${H-10}" text-anchor="middle" font-size="11" fill="var(--mu)">${p.i.toLocaleString('en-US')}</text>`;
+  });
+  el.innerHTML=s+'</svg>';
+}
+function renderTypes(){
+  const T=[['long','🎙️ المقاطع الطويلة'],['short','📱 مقاطع الشورت']];
+  $('typeCard').innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px">'+T.map(([k,lb])=>{
+    const a=data.filter(r=>(r.y||'long')===k);
+    const sum=f=>a.reduce((s,r)=>s+(parseFloat(r[f])||0),0);
+    const v=sum('c');
+    return `<div><b>${lb}</b><div class="stats" style="margin:10px 0 0"><div class="stat"><b>${a.length}</b><span>العدد</span></div><div class="stat"><b>${fmt(v)}</b><span>إجمالي المشاهدات</span></div><div class="stat"><b>${a.length?fmt(v/a.length):'—'}</b><span>متوسط المشاهدات</span></div><div class="stat"><b>${fmt(sum('h'))}</b><span>ساعات المشاهدة</span></div></div></div>`;
+  }).join('')+'</div>';
+}
+function renderSubChart(){
+  const el=$('subchart'),inc=$('sm').value==='inc';
+  let pts=[];
+  if(inc){for(let i=1;i<subs.length;i++)pts.push({d:subs[i].d,v:subs[i].n-subs[i-1].n})}
+  else pts=subs.map(s=>({d:s.d,v:s.n}));
+  pts=pts.slice(-14);
+  if(!pts.length){el.innerHTML='<div class="note">'+(inc?'سجّل عددين على الأقل لعرض الزيادة.':'سجّل عدد المتابعين لعرض الرسم.')+'</div>';return}
+  const W=700,H=240,L=14,R=14,T=22,B=30;
+  const hi=Math.max(0,...pts.map(p=>p.v))||1,lo=Math.min(0,...pts.map(p=>p.v));
+  const y=v=>T+(H-T-B)*(hi-v)/(hi-lo);
+  const slot=(W-L-R)/pts.length,bw=Math.min(slot*0.6,46);
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img"><line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--bd)"/>`;
+  pts.forEach((p,j)=>{
+    const cx=L+slot*(j+.5),y1=y(Math.max(p.v,0)),y2=y(Math.min(p.v,0)),h=Math.max(y2-y1,2);
+    s+=`<rect x="${cx-bw/2}" y="${y1}" width="${bw}" height="${h}" rx="4" fill="${p.v<0?'var(--mu)':'var(--bar)'}"><title>${p.d}: ${inc?sgn(p.v):nf(p.v)}</title></rect>`;
+    s+=`<text x="${cx}" y="${p.v<0?y2+13:y1-5}" text-anchor="middle" font-size="11" fill="var(--tx)">${inc?sgn(p.v):nf(p.v)}</text>`;
+    s+=`<text x="${cx}" y="${H-10}" text-anchor="middle" font-size="11" fill="var(--mu)">${p.d.slice(5)}</text>`;
+  });
+  el.innerHTML=s+'</svg>';
+}
+$('sm').onchange=renderSubChart;
+$('cm').onchange=renderChart;
+$('subd').value=new Date().toISOString().slice(0,10);
+$('subadd').onclick=()=>{
+  const n=parseFloat($('subn').value),d=$('subd').value;
+  if(!(n>=0)||!d){msg('أدخل عدد المتابعين والتاريخ');return}
+  subs=subs.filter(s=>s.d!==d);subs.push({d,n});saveSubs();renderSubs();$('subn').value='';msg('تم تسجيل المتابعين ✓');
+};
+$('sublist').addEventListener('click',e=>{const d=e.target.dataset.sd;if(d){subs=subs.filter(s=>s.d!==d);saveSubs();renderSubs()}});
+function parseCSV(t){const out=[];let row=[],f='',q=false;t=t.replace(/^\uFEFF/,'');
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true;else if(c===','){row.push(f);f=''}
+    else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(f);f='';if(row.some(x=>x!==''))out.push(row);row=[]}
+    else f+=c}
+  row.push(f);if(row.some(x=>x!==''))out.push(row);return out}
+$('ci').onclick=()=>$('cf').click();
+$('cf').onchange=e=>{
+  const file=e.target.files[0];if(!file)return;
+  const rd=new FileReader();
+  rd.onload=()=>{try{
+    const a=parseCSV(rd.result),h=a[0].map(x=>x.trim());
+    const ix=n=>h.findIndex(x=>x.startsWith(n));
+    const K={t:ix('عنوان'),y:ix('النوع'),s:ix('الحالة'),u:ix('مدة الحلقة'),d:ix('تاريخ'),c:ix('المشاهدات'),l:ix('الإعجابات'),m:ix('التعليقات'),h:ix('وقت المشاهدة'),r:ix('CTR')};
+    if(K.t<0||K.c<0)throw new Error('bad');
+    const g=(r,k)=>K[k]>=0?(r[K[k]]||'').trim():'';
+    data=a.slice(1).map(r=>({t:g(r,'t'),d:g(r,'d'),n:'',c:g(r,'c'),l:g(r,'l'),m:g(r,'m'),h:g(r,'h'),r:g(r,'r'),u:g(r,'u'),y:g(r,'y')==='شورت'?'short':'long',s:g(r,'s')==='لم يتم النشر'?'draft':'pub'}));
+    save();render();msg('تم استيراد '+data.length+' حلقة من CSV ✓');
+  }catch(err){msg('ملف CSV غير صالح')}};
+  rd.readAsText(file,'utf-8');e.target.value='';
+};
 
-</Steps>
+let aud={sub:'',non:'',nw:'',cs:'',rg:''};
+try{const sv=localStorage.getItem(KEY+'-aud');if(sv)aud={...aud,...JSON.parse(sv)}}catch(e){}
+function saveAud(){try{localStorage.setItem(KEY+'-aud',JSON.stringify(aud));localStorage.setItem(KEY+'-ts',Date.now())}catch(e){}}
+function setAudInputs(){document.querySelectorAll('[data-ak]').forEach(el=>{el.value=aud[el.dataset.ak]??''});renderAud()}
+function audBar(barId,lgId,items){
+  const tot=items.reduce((a,o)=>a+(parseFloat(o.v)||0),0);
+  $(barId).innerHTML=tot>0?items.map(o=>{const v=parseFloat(o.v)||0,w=v/tot*100;return v>0?`<i style="width:${w}%;background:${o.c};color:${o.t}">${w>=12?v+'%':''}</i>`:''}).join(''):'';
+  $(lgId).innerHTML=items.map(o=>`<span><u style="background:${o.c}"></u>${o.l}: ${o.v!==''&&o.v!=null?o.v+'%':'—'}</span>`).join('')+(tot>0&&Math.abs(tot-100)>0.5?`<span style="color:var(--ac)">⚠ المجموع ${+tot.toFixed(1)}%</span>`:'');
+}
+function renderAud(){
+  audBar('audBar1','audLg1',[{l:'المشتركون',v:aud.sub,c:'var(--bar)',t:'var(--act)'},{l:'غير المشتركين',v:aud.non,c:'var(--mu)',t:'var(--bg)'}]);
+  audBar('audBar2','audLg2',[{l:'جدد',v:aud.nw,c:'var(--bar)',t:'var(--act)'},{l:'عاديون',v:aud.cs,c:'var(--mu)',t:'var(--bg)'},{l:'منتظمون',v:aud.rg,c:'var(--bd)',t:'var(--tx)'}]);
+}
+document.addEventListener('input',e=>{
+  const k=e.target.dataset&&e.target.dataset.ak;if(!k)return;
+  let v=e.target.value===''?'':Math.min(100,Math.max(0,+e.target.value));
+  aud[k]=v;
+  const pair={sub:'non',non:'sub'}[k];
+  if(pair){aud[pair]=v===''?'':+(100-v).toFixed(1);const o=document.querySelector('[data-ak="'+pair+'"]');if(o)o.value=aud[pair]}
+  saveAud();renderAud();
+});
+let snap={d:'2026-11-13',v:2400,l:92,m:11,sh:105,w:39,x:1607};
+try{const sv=localStorage.getItem(KEY+'-snap');if(sv)snap=JSON.parse(sv)}catch(e){}
+function saveSnap(){try{localStorage.setItem(KEY+'-snap',JSON.stringify(snap));localStorage.setItem(KEY+'-ts',Date.now())}catch(e){}}
+function renderSnap(){
+  $('snapStats').innerHTML=[['av','المشاهدات'],['al','الإعجابات'],['am','التعليقات']].map(([id,lb])=>`<div class="stat"><b id="${id}">—</b><span>${lb} (من الجدول)</span></div>`).join('');updateSnapAuto();
+}
+$('snapStats').addEventListener('input',e=>{const k=e.target.dataset.sk;if(k){snap[k]=k==='d'?e.target.value:(e.target.value===''?'':+e.target.value);saveSnap()}});
+render();
+renderSubs();
+renderSnap();
+setAudInputs();
+applyUI();
+window.addEventListener('load',update);window.addEventListener('resize',update);setTimeout(update,300);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(update);
+</script>
+</body>
+</html>
